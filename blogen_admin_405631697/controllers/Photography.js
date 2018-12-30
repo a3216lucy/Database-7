@@ -1,62 +1,63 @@
 const moment = require('moment');
 
-const Post = require('../models/post');
-const Category = require('../models/category');
+const photography = require('../models/photography');
+// const Company = require('../models/company');
 
 /* READ *****************************/
 
-exports.getPosts = (req, res, next) => {
-    Post.fetchAll()
+exports.getphotography = (req, res, next) => {
+    photography.fetchAll()
         .then(([rows]) => {
             for (let p of rows) {
                 p.date = moment(p.date).format('MMM D, YYYY');
             }
-            console.log(JSON.stringify(rows, ["id", "title", "date"]));
+            console.log(JSON.stringify(rows, ["id", "title", "tag","content","img_url","url","date"]));
             //res.send(JSON.stringify(rows));
-            res.render('posts', {
+            res.render('photography', {
                 data: rows,
-                title: 'Post List',
+                title: 'list',
             });
         })
         .catch(err => console.log(err));
 };
 
-exports.getEditPost = async (req, res, next) => {
+exports.getEditphotography = async(req, res, next) => {
 
-    let categories;
-    let post;
+    // let categories;
+    let photography;
 
-    const getCategories = await Category.fetchAll()
+    // const getCategories = await Category.fetchAll()
+    //     .then(([rows]) => {
+    //         categories = rows;
+    //         //console.log('findCategories(): ', JSON.stringify(rows));
+    //     })
+
+    const findPostById = await photography.findById(req.query.id)
         .then(([rows]) => {
-            categories = rows;
-            //console.log('findCategories(): ', JSON.stringify(rows));
-        })
-
-    const findPostById = await Post.findById(req.query.id)
-        .then(([rows]) => {
-            for (let p of rows) {
-                p.date = moment(p.date).format('YYYY-MM-DD');
-                console.log('p.date: ', p.date);
-            }
-            post = rows;
+            // for (let p of rows) {
+            //     p.date = moment(p.date).format('YYYY-MM-DD');
+            //     console.log('p.date: ', p.date);
+            // }
+            photography = rows;
             //console.log('post[0].date: ', post[0].date);
-           //console.log('findPostById(): ', JSON.stringify(rows));
+            //console.log('findPostById(): ', JSON.stringify(rows));
         })
         .catch(err => console.log(err));
 
-    console.log('post: ', JSON.stringify(post[0].date));
+    console.log('photography: ', JSON.stringify(photography[0].date));
     
     res.render('details', {
-        data: post,
-        title: 'Edit Post',
-        categories: categories
+        data: photography,
+        title: 'Edit photography',
+        // categories: categories
+
    });
 
 };
 
-exports.postAddPost = (req, res, next) => {
+exports.postAddphotography = (req, res, next) => {
 
-    Post.add(req, res)
+    photography.add(req, res)
         .then(([rows]) => {
             res.redirect('/');
         })
@@ -65,19 +66,20 @@ exports.postAddPost = (req, res, next) => {
 
 
 
-exports.postUpdatePost = (req, res, next) => {
 
-    Post.updateById(req, res)
+exports.postUpdatephotography = (req, res, next) => {
+
+    photography.updateById(req, res)
         .then(([rows]) => {
             res.redirect('/');
         })
         .catch(err => console.log(err));
 };
 
-exports.getDeletePost = (req, res, next) => {
-    Post.deleteById(req.query.id)
+exports.getDeletephotography = (req, res, next) => {
+    photography.deleteById(req.query.id)
         .then(([rows]) => {
-            res.redirect('/post');
+            res.redirect('/photography');
         })
         .catch();
-};
+}

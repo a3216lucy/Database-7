@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 const postRouter = require('./routes/post');
 const productRoutuer = require('./routes/db_405631697');
 const newTopicsRouter = require('./routes/new_topics');
+const photographyRouter = require('./routes/photography');
 var app = express();
 
 // view engine setup
@@ -26,6 +27,7 @@ app.use('/post', postRouter);
 app.use('/users', usersRouter);
 app.use('/db_405631697', productRoutuer);
 app.use('/new_topics', newTopicsRouter);
+app.use('/photography', photographyRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-const postController = require('../controllers/post');
+const photographyController = require('../controllers/photography');
 
-router.get('/', postController.getPosts);
+router.get('/', photographyController.getphotography);
 
-router.get('/edit', postController.getEditPost);
+router.get('/edit', photographyController.getEditphotography);
 
-router.post('/add', postController.postAddPost);
+router.post('/add',photographyController.postAddphotography);
 
-router.post('/update', postController.postUpdatePost);
+router.post('/update', photographyController.postUpdatephotography);
 
-router.get('/delete', postController.getDeletePost);
+router.get('/delete', photographyController.getDeletephotography);
 
 module.exports = router;
