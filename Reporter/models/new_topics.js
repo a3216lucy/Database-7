@@ -8,6 +8,12 @@ module.exports = class new_Topics {
         this.url = url;
     }
 
+    static pythonAdd(results){
+        return db.execute(
+            'INSERT INTO new_topics (title, content, url) VALUES (?, ?, ?)', [results.title, results.content, results.url]
+        );
+    }
+    
     // CREATE 
     static add(req, res) {
         //console.log('add():', req.body.name, req.body.price);
@@ -48,6 +54,6 @@ module.exports = class new_Topics {
 
 
     static getCount() {
-        return db.execute('SELECT COUNT(*) as count FROM topics');
+        return db.execute('SELECT COUNT(*) as count FROM new_topics');
     }
 };

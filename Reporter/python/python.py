@@ -27,7 +27,7 @@ def BeautyFindAll(topics_soup,tag,key): #topics_soup為已套用bs之內碼，ta
 def Content(soup): #爬出一篇專題內文+文章
   txt_title = soup.find('h1') #尋找開頭為<h1>的第一筆資料
   title = (BeautyStr(txt_title)).string
-  content = []
+  #content = []
   txt = soup.find('div',class_='s1912usa-1 bYtlIh') #尋找<div>標籤中class名稱為s1912usa-1 bYtlIh的第一筆資料
   txt_b = (BeautyStr(txt)).find('blockquote') #尋找標籤<blockquote>
   contents=''
@@ -47,9 +47,9 @@ def Content(soup): #爬出一篇專題內文+文章
   d_list = BeautyFindAll(down_topics,'div','description')
   date_list = BeautyFindAll(down_topics,'p','date')
   print(json.dumps({'title':title,'content':contents,'url':'aaa'}))
-  count = 0
-  for t,d,date,url in zip(t_list,d_list,date_list,url_list):
-    count+=1
+  #count = 0
+  #for t,d,date,url in zip(t_list,d_list,date_list,url_list):
+  #  count+=1
 #   print("==================")
 
 # <main>
@@ -57,10 +57,10 @@ topic_url = "https://www.twreporter.org/topics"
 # topic = Beauty(topic_url)
 resource = requests.get(topic_url) #得到網站的原始碼
 soup = BeautifulSoup(resource.text, 'html.parser') #套用BeautifulSoup
-topic_pages = topic.find_all('div',class_=re.compile('pagination'))
+topic_pages = soup.find_all('div',class_=re.compile('pagination'))
 topic_pagesf = topic_pages[len(topic_pages)-2]
 pages = (BeautyStr(topic_pagesf).span).string
-print(json.dumps('Hello'))
+#print(json.dumps('Hello'))
 for page in reversed(range(0,int(pages)+1)):
   topic_url = "https://www.twreporter.org/topics?page="+str(page)
   topic_soup = Beauty(topic_url)
@@ -81,6 +81,6 @@ for page in reversed(range(0,int(pages)+1)):
       u_soup = Beauty('https://www.twreporter.org'+u)
       Content(u_soup)
   #     break
-  break
+  # break
 #   for t,d,date,url in zip(ten_list_t,ten_list_ds,ten_list_da,ten_list_url):
 # print("URL:"+reporter_url+url+"\n"+"Title:"+t+"\n"+"Description:"+d+"\n"+"Date:"+date+"\n")

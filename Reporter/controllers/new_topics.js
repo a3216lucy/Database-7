@@ -15,24 +15,24 @@ const New_topics = require('../models/new_topics');
         // results is an array consisting of messages collected during execution
         console.log('results: %j', results);
 
-                //  for(i=0;i<2;i++){
-                //     // console.log(results[i].title)
-                //     // Promise.resolve(New_topics.searchTitle(results[i].title) ).then(([rows]) => {
-                //     //     console.log(results[i].title)
-                //     //     console.log('1',rows[1]);
-                //         // if(rows[1]!=''){
-                //             // console.log('2',rows[2]);
-                //              New_topics.pythonAdd(results[i])
-                //             .then(([rows]) => {
+                 for(i=0;i<results.length;i++){
+                    // console.log(results[i].title)
+                    // Promise.resolve(New_topics.searchTitle(results[i].title) ).then(([rows]) => {
+                    //     console.log(results[i].title)
+                    //     console.log('1',rows[1]);
+                        // if(rows[1]!=''){
+                            // console.log('2',rows[2]);
+                             New_topics.pythonAdd(results[i])
+                            .then(([rows]) => {
                                 
-                //             // console.log('results: %j',rows.title);
-                //             // console.log('resultssql: %j', rows);
-                //             // res.redirect('/');
-                //             })
-                //             .catch(err => console.log(err));
-                //         }
-                    // });
-                // }
+                            // console.log('results: %j',rows.title);
+                            // console.log('resultssql: %j', rows);
+                            // res.redirect('/');
+                            })
+                            .catch(err => console.log(err));
+                        }
+                    
+                
     });
 // // }
 // // var test =  new PythonShell('python.py', options);

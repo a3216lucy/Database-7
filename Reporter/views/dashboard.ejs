@@ -100,39 +100,71 @@
     </section>
 
     <!-- POSTS -->
-    <section id="posts">
+    <section id="photography">
         <div class="container">
             <div class="row">
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Latest Posts</h4>
+                            <h4>Latest Photography</h4>
                         </div>
                         <table class="table table-striped">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>#</th>
                                     <th>Title</th>
-                                    <th>Category</th>
+                                    <th>Tag</th>
                                     <th>Date</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% for(var i=0; i< data.length; i++) { %>
+                                <% for(var i=0; i< photography.length; i++) { %>
                                     <tr>
                                         <td>
-                                            <%= data[i].id %>
+                                            <%= photography[i].id %>
                                         </td>
                                         <td>
-                                            <%= data[i].title %>
+                                            <%= photography[i].title %>
                                         </td>
                                         <td>
-                                            <%= data[i].category %>
+                                            <%= photography[i].tag %>
                                         </td>
                                         <td>
-                                            <%= data[i].date %>
+                                            <%= photography[i].date %>
                                         </td>
+                                        <td>
+                                            <button value="Details" class="btn btn-secondary" onclick="editPost('<%= data[i].id %>')">
+                      <i class="fas fa-angle-double-right"></i> Details
+                    </button>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Latest Topics</h4>
+                        </div>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Title</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i< topic.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= topic[i].id %>
+                                        </td>
+                                        <td>
+                                            <%= topic[i].title %>
+                                        </td>
+                                    
                                         <td>
                                             <button value="Details" class="btn btn-secondary" onclick="editPost('<%= data[i].id %>')">
                       <i class="fas fa-angle-double-right"></i> Details
@@ -147,10 +179,10 @@
                 <div class="col-md-3">
                     <div class="card text-center bg-primary text-white mb-3">
                         <div class="card-body">
-                            <h3>Posts</h3>
+                            <h3>Photography</h3>
                             <h4 class="display-4">
                                 <i class="fas fa-pencil-alt"></i>
-                                <%= postCount %>
+                                <%= photographyCount %>
                             </h4>
                             <a href="/post" class="btn btn-outline-light btn-sm">View</a>
                         </div>
@@ -158,10 +190,10 @@
 
                     <div class="card text-center bg-success text-white mb-3">
                         <div class="card-body">
-                            <h3>Categories</h3>
+                            <h3>Topics</h3>
                             <h4 class="display-4">
                                 <i class="fas fa-folder"></i>
-                                <%= categoryCount %>
+                                <%= new_topicsCount %>
                             </h4>
                             <a href="/category" class="btn btn-outline-light btn-sm">View</a>
                         </div>
@@ -181,6 +213,48 @@
             </div>
         </div>
     </section>
+
+    <!-- TOPICS
+    <section id="topics">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Latest Topics</h4>
+                        </div>
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Title</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i< topic.length; i++) { %>
+                                    <tr>
+                                        <td>
+                                            <%= topic[i].id %>
+                                        </td>
+                                        <td>
+                                            <%= topic[i].title %>
+                                        </td>
+                                    
+                                        <td>
+                                            <button value="Details" class="btn btn-secondary" onclick="editPost('<%= data[i].id %>')">
+                      <i class="fas fa-angle-double-right"></i> Details
+                    </button>
+                                        </td>
+                                    </tr>
+                                    <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
 
     <!-- FOOTER -->
     <footer id="main-footer" class="bg-dark text-white mt-5 p-5">
