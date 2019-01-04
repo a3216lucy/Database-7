@@ -1,16 +1,55 @@
 const moment = require('moment');
 
 const New_topics = require('../models/new_topics');
-const Company = require('../models/company');
-
 /* READ *****************************/
+
+// exports.loadTopics = async(req, res, next) => {
+    let {PythonShell} = require('python-shell')
+    let options = {
+        mode: 'json',
+        pythonOptions: ['-u'],
+        scriptPath: './python',
+    };
+    PythonShell.run('python.py', options, function (err, results,res) {
+        if (err) console.log(err);
+        // results is an array consisting of messages collected during execution
+        console.log('results: %j', results);
+
+                //  for(i=0;i<2;i++){
+                //     // console.log(results[i].title)
+                //     // Promise.resolve(New_topics.searchTitle(results[i].title) ).then(([rows]) => {
+                //     //     console.log(results[i].title)
+                //     //     console.log('1',rows[1]);
+                //         // if(rows[1]!=''){
+                //             // console.log('2',rows[2]);
+                //              New_topics.pythonAdd(results[i])
+                //             .then(([rows]) => {
+                                
+                //             // console.log('results: %j',rows.title);
+                //             // console.log('resultssql: %j', rows);
+                //             // res.redirect('/');
+                //             })
+                //             .catch(err => console.log(err));
+                //         }
+                    // });
+                // }
+    });
+// // }
+// // var test =  new PythonShell('python.py', options);
+// // test.on('message',function (message) {
+// //     console.log(message);
+// // });
 
 exports.getProduct = (req, res, next) => {
     let cname;
     let new_topics;
+    
     New_topics.fetchAll()
         .then(([rows]) => {
-            console.log(JSON.stringify(rows, ["id", "title", "content", "url"]));
+            for (let p of rows) {
+                p.date = moment(new Date(p.date)).format('MMM D, YYYY');
+            }
+            // console.log(JSON.stringify(rows, ["id", "title","tag","content", "url","date"]));
             // res.send(JSON.stringify(rows));
             new_topics = rows;
             res.render('new_topics', {
