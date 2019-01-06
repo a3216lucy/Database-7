@@ -4,36 +4,36 @@ const New_topics = require('../models/new_topics');
 /* READ *****************************/
 
 // exports.loadTopics = async(req, res, next) => {
-    let {PythonShell} = require('python-shell')
-    let options = {
-        mode: 'json',
-        pythonOptions: ['-u'],
-        scriptPath: './python',
-    };
-    PythonShell.run('python.py', options, function (err, results,res) {
-        if (err) console.log(err);
-        // results is an array consisting of messages collected during execution
-        console.log('results: %j', results);
+    // let {PythonShell} = require('python-shell')
+    // let options = {
+    //     mode: "json",
+    //     pythonOptions: ["-u"],
+    //     scriptPath: "./python",
+    // };
+    // PythonShell.run("python.py", options, function (err, results,res) {
+    //     if (err) console.log(err);
+    //     // results is an array consisting of messages collected during execution
+    //     console.log('results: %j', results);
 
-                 for(i=0;i<results.length;i++){
-                    // console.log(results[i].title)
-                    // Promise.resolve(New_topics.searchTitle(results[i].title) ).then(([rows]) => {
-                    //     console.log(results[i].title)
-                    //     console.log('1',rows[1]);
-                        // if(rows[1]!=''){
-                            // console.log('2',rows[2]);
-                             New_topics.pythonAdd(results[i])
-                            .then(([rows]) => {
+    //              for(i=0;i<results.length;i++){
+    //                 // console.log(results[i].title)
+    //                 // Promise.resolve(New_topics.searchTitle(results[i].title) ).then(([rows]) => {
+    //                 //     console.log(results[i].title)
+    //                 //     console.log('1',rows[1]);
+    //                     // if(rows[1]!=''){
+    //                         // console.log('2',rows[2]);
+    //                          New_topics.pythonAdd(results[i])
+    //                         .then(([rows]) => {
                                 
-                            // console.log('results: %j',rows.title);
-                            // console.log('resultssql: %j', rows);
-                            // res.redirect('/');
-                            })
-                            .catch(err => console.log(err));
-                        }
+    //                         // console.log('results: %j',rows.title);
+    //                         // console.log('resultssql: %j', rows);
+    //                         // res.redirect('/');
+    //                         })
+    //                         .catch(err => console.log(err));
+    //                     }
                     
                 
-    });
+    // });
 // // }
 // // var test =  new PythonShell('python.py', options);
 // // test.on('message',function (message) {
@@ -66,11 +66,11 @@ exports.getEditProduct = async(req, res, next) => {
     let categories;
     let new_topics;
 
-    const getCategories = await Category.fetchAll()
-        .then(([rows]) => {
-            categories = rows;
-            //console.log('findCategories(): ', JSON.stringify(rows));
-        })
+    // const getCategories = await Category.fetchAll()
+    //     .then(([rows]) => {
+    //         categories = rows;
+    //         //console.log('findCategories(): ', JSON.stringify(rows));
+    //     })
 
     const findPostById = await New_topics.findById(req.query.id)
         .then(([rows]) => {
@@ -103,12 +103,11 @@ exports.postAddProduct = (req, res, next) => {
         .catch(err => console.log(err));
 };
 
-
-
 exports.postUpdateProduct = (req, res, next) => {
-
+    //console.log(req)
     New_topics.updateById(req, res)
         .then(([rows]) => {
+
             res.redirect('/');
         })
         .catch(err => console.log(err));

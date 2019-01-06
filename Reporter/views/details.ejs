@@ -12,11 +12,11 @@
   <link rel="stylesheet" href="css/style.css">
   <title>Bootstrap Theme</title>
   <script>
-    function savePost() {
-            document.getElementById("savePost").submit();
+    function saveChange() {
+            document.getElementById("saveChange").submit();
         }
-        function deletePost(id) {
-            window.location.href = "/post/delete?id=" + id;
+        function deleteNews(id) {
+            window.location.href = "/new_topics/delete?id=" + id;
         }    
   </script>
 </head>
@@ -74,7 +74,7 @@
       <div class="row">
         <div class="col-md-6">
           <h1>
-            <%= data[0].title %>
+            Edit
           </h1>
         </div>
       </div>
@@ -91,13 +91,13 @@
           </a>
         </div>
         <div class="col-md-3">
-          <button class="btn btn-success btn-block" onclick="savePost()">
+          <button class="btn btn-success btn-block" onclick="saveChange()">
             <i class="fas fa-check"></i> Save Changes
             </buton>
         </div>
         <div class="col-md-3">
-          <button class="btn btn-danger btn-block" onclick="deletePost(<%= data[0].id %>)">
-            <i class="fas fa-trash"></i> Delete Post
+          <button class="btn btn-danger btn-block" onclick="deleteNews('<%= data[0].id %>')">
+            <i class="fas fa-trash"></i> Delete
           </button>
         </div>
       </div>
@@ -111,34 +111,21 @@
         <div class="col">
           <div class="card">
             <div class="card-header">
-              <h4>Edit Post</h4>
+              <h4>Edit Topic</h4>
             </div>
             <div class="card-body">
-              <form id="savePost" action="/post/update" method="post">
-                <input type="hidden" name="id" value="<%= data[0].id %>">
-                <div class="form-group">
+              <form id="saveChange" action="/new_topics/update" method="post">
+                <input type="hidden" name="url" value="<%= data[0].url %>">
+
+                <div class="form-group"> 
+                <label for="id"> ID</label>
+                <input type="text" name="id" class="form-control" value="<%= data[0].id %>" readonly>
+               </div>
+                <div class="form-group"> 
                   <label for="title"> Title</label>
                   <input type="text" name="title" class="form-control" value="<%= data[0].title %>">
                 </div>
                 <!-- <input type="hidden" name="date" value="<%= data[0].date %>"> -->
-                <div class="form-group">
-                  <label for="postdate">Date</label>
-                  <input name="date" type="date" id="postdate" class="form-control" value="<%= data[0].date %>">
-                </div>
-                <div class="form-group">
-                  <label for="category">Category</label>
-                  <select class="form-control" name="category">
-                    <% 
-                      for ( var i = 0 ; i < categories.length ; i++){ 
-                        var selected = ( data[0].category == categories[i].title ) ? "selected" : "";
-                        console.log('selected:', selected, data[0].category, categories[i].title)
-                    %>
-                    <option value="<%= categories[i].title %>" <%= selected %>>
-                      <%= categories[i].title %>
-                    </option>
-                    <% } %>
-                  </select>
-                </div>
                 <!-- <div class="form-group">
                   <label for="image">Upload Image</label>
                   <div class="custom-file">
@@ -148,9 +135,9 @@
                   <small class="form-text text-muted">Max Size 3mb</small>
                 </div> -->
                 <div class="form-group">
-                  <label for="body">Body</label>
+                  <label for="content">Body</label>
                   <textarea name="editor1" class="form-control">
-                    <%= data[0].article %>
+                    <%= data[0].content %>
                   </textarea>
                 </div>
               </form>

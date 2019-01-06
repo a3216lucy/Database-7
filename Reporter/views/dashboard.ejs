@@ -13,7 +13,9 @@
         function editPost(id) {
             window.location.href = "/post/edit?id=" + id;
         }
-
+        function editTopic(id) {
+            window.location.href = "/new_topics/edit?id=" + id;
+        }
         function addPost() {
             document.getElementById("addPost").submit();
         }
@@ -134,7 +136,7 @@
                                             <%= photography[i].date %>
                                         </td>
                                         <td>
-                                            <button value="Details" class="btn btn-secondary" onclick="editPost('<%= data[i].id %>')">
+                                            <button value="Details" class="btn btn-secondary" onclick="editPost('<%= photography[i].id %>')">
                       <i class="fas fa-angle-double-right"></i> Details
                     </button>
                                         </td>
@@ -166,8 +168,8 @@
                                         </td>
                                     
                                         <td>
-                                            <button value="Details" class="btn btn-secondary" onclick="editPost('<%= data[i].id %>')">
-                      <i class="fas fa-angle-double-right"></i> Details
+                                            <button value="Topics" class="btn btn-secondary" onclick="editTopic('<%= topic[i].id %>')">
+                      <i class="fas fa-angle-double-right"></i> Edit Topics
                     </button>
                                         </td>
                                     </tr>
@@ -213,48 +215,6 @@
             </div>
         </div>
     </section>
-
-    <!-- TOPICS
-    <section id="topics">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Latest Topics</h4>
-                        </div>
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>id</th>
-                                    <th>Title</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <% for(var i=0; i< topic.length; i++) { %>
-                                    <tr>
-                                        <td>
-                                            <%= topic[i].id %>
-                                        </td>
-                                        <td>
-                                            <%= topic[i].title %>
-                                        </td>
-                                    
-                                        <td>
-                                            <button value="Details" class="btn btn-secondary" onclick="editPost('<%= data[i].id %>')">
-                      <i class="fas fa-angle-double-right"></i> Details
-                    </button>
-                                        </td>
-                                    </tr>
-                                    <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
 
     <!-- FOOTER -->
     <footer id="main-footer" class="bg-dark text-white mt-5 p-5">

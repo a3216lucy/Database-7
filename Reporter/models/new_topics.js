@@ -35,7 +35,7 @@ module.exports = class new_Topics {
     static updateById(req, res) {
         const id = req.body.id;
         const title = req.body.title;
-        const content = req.body.content;
+        const content = req.body.editor1;
         const url = req.body.url;
         //const date = new Date();
         console.log('model:updateById()', id, title, content, url)
