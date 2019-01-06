@@ -6,6 +6,7 @@ module.exports = class new_Topics {
         this.title = title;
         this.content = content;
         this.url = url;
+        
     }
 
     static pythonAdd(results){

@@ -13,10 +13,13 @@
     <title>Reporter</title>
     <script>
         function deleteAccount(id) {
-            window.location.href = "/db_405631697/delete?id=" + id;
+            window.location.href = "/db_405631697/delete?Page=" + id;
         }
         function editTopic(id) {
-            window.location.href = "/new_topics/edit?id=" + id;
+            window.location.href = "/new_topics/edit?Page=" + id;
+        }
+        function PagePost(id) {
+            window.location.href = "/new_topics/?Page=" + id;
         }
     </script>
 </head>
@@ -34,7 +37,7 @@
                         <a href="/" class="nav-link">Dashboard</a>
                     </li>
                     <li class="nav-item px-2">
-                        <a href="/new_topics" class="nav-link active">Topics</a>
+                        <a href="/new_topics/?Page=1" class="nav-link active">Topics</a>
                     </li>
                     <li class="nav-item px-2">
                         <a href="/photography" class="nav-link">Photography</a>
@@ -113,65 +116,71 @@
                                 </tr>
                             </thead> -->
                             <tbody class="tbody-dark">
-                                <% for(var i=0; i< data.length; i++) { %>
+                                
                                 <tr>
                                     <th scope="row">id</th>
                                     <td>
-                                        <%= data[i].id %>
+                                        <%= data[0].id %>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">title</th>
                                     <td>
-                                        <a href=" <%= data[i].url %>" target="new_blank"><%= data[i].title %></a>
+                                        <a href=" <%= data[0].url %>" target="new_blank"><%= data[0].title %></a>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th scope="row">content</th>
                                     <td>
-                                        <%= data[i].content %>
+                                        <%= data[0].content %>
                                     </td>
                                 </tr>
                                 <!-- <tr>
                                     <th scope="row">url</th>
                                     <td>
-                                        <%= data[i].url %>
+                                        <%= data[0].url %>
                                     </td>
                                 </tr> -->
                                 <tr>
                                     <th scope="row">Action</th>
                                     <td>
-                                        <button button value="Details" class="btn btn-secondary" onclick="EditTopic('<%= data[i].id %>')">
+                                        <button button value="Details" class="btn btn-secondary" onclick="EditTopic('<%= data[0].id %>')">
                                             <i class="fas fa-angle-double-right"></i> Details
                                         </button>
-                                        <button value="Deletes" class="btn btn-secondary" onclick="deleteAccount('<%= data[i].id %>')">
+                                        <button value="Deletes" class="btn btn-secondary" onclick="deleteAccount('<%= data[0].id %>')">
                                             <i class="fas fa-angle-double-right"></i> Delete
                                         </button>
                                     </td>
                                     </th>
                                 </tr>
-                                <% } %>
+                            
                             </tbody>
                         </table>
 
                         <!-- PAGINATION -->
                         <nav class="ml-4">
                             <ul class="pagination">
-                                <li class="page-item disabled">
-                                    <a href="#" class="page-link">Previous</a>
+                                <li class="page-item">
+                                    <a href="/new_topics/?Page=1" class="page-link">First</a>
                                 </li>
                                 <li class="page-item active">
-                                    <a href="#" class="page-link">1</a>
+                                    <a href="/new_topics/?Page=<%= data[0].id %>" class="page-link"> <%= data[0].id %></a>
                                 </li>
+                                <%if(data[0].id+1< length ){%>
                                 <li class="page-item">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
+                                    <a href="/new_topics/?Page=<%= data[0].id+1 %>" class="page-link"><%= data[0].id+1 %></a>
+                                </li><%}%>
+                                <%if(data[0].id+2< length ){%>
                                 <li class="page-item">
-                                    <a href="#" class="page-link">3</a>
+                                    <a href="/new_topics/?Page=<%= data[0].id+2 %>" class="page-link"><%= data[0].id+2 %></a>
                                 </li>
+                                <li>
+                                    ......
+                                    <li><%}%>
+                                <%if(data[0].id!=length ){%>       
                                 <li class="page-item">
-                                    <a href="#" class="page-link">Next</a>
-                                </li>
+                                    <a href="/new_topics/?Page=<%= length %>" class="page-link"><%= length %></a>
+                                </li><%}%>
                             </ul>
                         </nav>
                     </div>

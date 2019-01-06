@@ -13,4 +13,5 @@ router.post('/update', newTopicsController.postUpdateProduct);
 
 router.get('/delete', newTopicsController.getDeleteProduct);
 
+
 module.exports = router;

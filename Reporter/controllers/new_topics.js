@@ -39,26 +39,41 @@ const New_topics = require('../models/new_topics');
 // // test.on('message',function (message) {
 // //     console.log(message);
 // // });
+exports.getProduct = async(req, res, next) => {
 
-exports.getProduct = (req, res, next) => {
-    let cname;
+    let length1;
     let new_topics;
+
+
+    const findlength = await New_topics.fetchAll()
+    .then(([rows]) => {
+        length1=rows.length
+       
+    })
+    .catch(err => console.log(err));
     
-    New_topics.fetchAll()
+
+    const findPostById = await New_topics.findById(req.query.Page)
         .then(([rows]) => {
-            for (let p of rows) {
-                p.date = moment(new Date(p.date)).format('MMM D, YYYY');
-            }
-            // console.log(JSON.stringify(rows, ["id", "title","tag","content", "url","date"]));
-            // res.send(JSON.stringify(rows));
+            // for (let p of rows) {
+            //     p.date = moment(p.date).format('YYYY-MM-DD');
+            //     console.log('p.date: ', p.date);
+            // }
             new_topics = rows;
-            res.render('new_topics', {
-                data: rows,
-                title: 'list',
-            });
+            //console.log('post[0].date: ', post[0].date);
+            //console.log('findPostById(): ', JSON.stringify(rows));
         })
         .catch(err => console.log(err));
-    
+
+    // console.log('post: ', JSON.stringify(post[0].date));
+        console.log(length1);
+    res.render('new_topics', {
+        data: new_topics,
+        title: 'new_topics Post',
+        length: length1,
+        // categories: categories
+    });
+
 };
 
 exports.getEditProduct = async(req, res, next) => {
