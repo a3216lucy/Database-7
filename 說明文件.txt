@@ -1,0 +1,9 @@
+npm install
+npm install mysql2
+npm install moment
+
+裝置database G07後OK。
+
+附加
+https://colab.research.google.com/drive/13qWqwpd09o8DxIAqinsMBnEByIemNcWE
+以及csv檔
