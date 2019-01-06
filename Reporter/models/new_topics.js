@@ -1,11 +1,14 @@
 const db = require('../util/database');
 
 module.exports = class new_Topics {
-    constructor(id, title, content, url) {
+    constructor(id, title,tag, content, url, img_url, date) {
         this.id = id;
+        this.tag = tag;
         this.title = title;
         this.content = content;
         this.url = url;
+        this.img_url = img_url;
+        this.date = date;
         
     }
 
@@ -35,13 +38,16 @@ module.exports = class new_Topics {
     // UPDATE
     static updateById(req, res) {
         const id = req.body.id;
+        const tag = req.body.tag;
         const title = req.body.title;
         const content = req.body.editor1;
         const url = req.body.url;
+        const img_url = req.body.img_url;
+        const date = req.body.date;
         //const date = new Date();
         console.log('model:updateById()', id, title, content, url)
         return db.execute(
-            'UPDATE new_topics SET title = ?, content = ?, url = ? WHERE id = ?', [title, content, url, id]
+            'UPDATE new_topics SET title = ?, content = ?, url = ? WHERE id = ?', [title,tag, content, url,img_url,date, id]
         );
     }
 

@@ -66,20 +66,20 @@ exports.getDashboard = async (req, res, next) => {
     const getUserCount = await User.getCount()
       .then(([rows]) => {
         userCount = rows[0].count;
-        console.log('user count 1: ', userCount);
+        // console.log('user count 1: ', userCount);
       })
 
     const getTopics = await New_topics.fetchAll()
       .then(([rows]) => {
         //res.send(JSON.stringify(rows));
         new_topics = rows;
-        console.log('topic: ', new_topics);
+        // console.log('topic: ', new_topics);
       })
     const getPhotography = await Photography.fetchAll()
       .then(([rows]) => {
         //res.send(JSON.stringify(rows));
         photography = rows;
-        console.log('photography: ', photography);
+        // console.log('photography: ', photography);
       })
     const getTopicCount = await New_topics.getCount()
       .then(([rows]) => {

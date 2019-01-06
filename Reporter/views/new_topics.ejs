@@ -13,10 +13,10 @@
     <title>Reporter</title>
     <script>
         function deleteAccount(id) {
-            window.location.href = "/db_405631697/delete?Page=" + id;
+            window.location.href = "/db_405631697/delete?id=" + id;
         }
         function editTopic(id) {
-            window.location.href = "/new_topics/edit?Page=" + id;
+            window.location.href = "/new_topics/edit?id=" + id;
         }
         function PagePost(id) {
             window.location.href = "/new_topics/?Page=" + id;
@@ -27,7 +27,7 @@
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
         <div class="container">
-            <a href="." class="navbar-brand">Reporter</a>
+            <a href="" class="navbar-brand">Reporter</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -116,35 +116,43 @@
                                 </tr>
                             </thead> -->
                             <tbody class="tbody-dark">
-                                
+
                                 <tr>
-                                    <th scope="row">id</th>
+                                    <th scope="row">Id</th>
                                     <td>
                                         <%= data[0].id %>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">title</th>
+                                    <th scope="row">Title</th>
                                     <td>
-                                        <a href=" <%= data[0].url %>" target="new_blank"><%= data[0].title %></a>
+                                        <a href=" <%= data[0].url %>" target="new_blank">
+                                            <%= data[0].title %></a>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th scope="row">content</th>
+                                    <th scope="row">Tag</th>
+                                    <td>
+                                        <%= data[0].tag %>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">Content</th>
                                     <td>
                                         <%= data[0].content %>
                                     </td>
                                 </tr>
-                                <!-- <tr>
-                                    <th scope="row">url</th>
+                                <tr>
+                                    <th scope="row">Image</th>
                                     <td>
-                                        <%= data[0].url %>
+                                        <a href="<%= data[0].img_url %>" target="new_blank">
+                                        <img class="col-4" src="<%= data[0].img_url %>" alt="<%= data[0].title %>"></a>
                                     </td>
-                                </tr> -->
+                                </tr>
                                 <tr>
                                     <th scope="row">Action</th>
                                     <td>
-                                        <button button value="Details" class="btn btn-secondary" onclick="EditTopic('<%= data[0].id %>')">
+                                        <button button value="Details" class="btn btn-secondary" onclick="editTopic('<%= data[0].id %>')">
                                             <i class="fas fa-angle-double-right"></i> Details
                                         </button>
                                         <button value="Deletes" class="btn btn-secondary" onclick="deleteAccount('<%= data[0].id %>')">
@@ -153,7 +161,7 @@
                                     </td>
                                     </th>
                                 </tr>
-                            
+
                             </tbody>
                         </table>
 
@@ -164,23 +172,30 @@
                                     <a href="/new_topics/?Page=1" class="page-link">First</a>
                                 </li>
                                 <li class="page-item active">
-                                    <a href="/new_topics/?Page=<%= data[0].id %>" class="page-link"> <%= data[0].id %></a>
+                                    <a href="/new_topics/?Page=<%= data[0].id %>" class="page-link">
+                                        <%= data[0].id %></a>
                                 </li>
                                 <%if(data[0].id+1< length ){%>
                                 <li class="page-item">
-                                    <a href="/new_topics/?Page=<%= data[0].id+1 %>" class="page-link"><%= data[0].id+1 %></a>
-                                </li><%}%>
+                                    <a href="/new_topics/?Page=<%= data[0].id+1 %>" class="page-link">
+                                        <%= data[0].id+1 %></a>
+                                </li>
+                                <%}%>
                                 <%if(data[0].id+2< length ){%>
                                 <li class="page-item">
-                                    <a href="/new_topics/?Page=<%= data[0].id+2 %>" class="page-link"><%= data[0].id+2 %></a>
+                                    <a href="/new_topics/?Page=<%= data[0].id+2 %>" class="page-link">
+                                        <%= data[0].id+2 %></a>
                                 </li>
                                 <li>
                                     ......
-                                    <li><%}%>
-                                <%if(data[0].id!=length ){%>       
+                                <li>
+                                    <%}%>
+                                    <%if(data[0].id!=length ){%>
                                 <li class="page-item">
-                                    <a href="/new_topics/?Page=<%= length %>" class="page-link"><%= length %></a>
-                                </li><%}%>
+                                    <a href="/new_topics/?Page=<%= length %>" class="page-link">
+                                        <%= length %></a>
+                                </li>
+                                <%}%>
                             </ul>
                         </nav>
                     </div>
