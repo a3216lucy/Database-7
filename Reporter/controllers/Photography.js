@@ -1,17 +1,17 @@
 const moment = require('moment');
 
-const photography = require('../models/photography');
+const Photography = require('../models/photography');
 // const Company = require('../models/company');
 
 /* READ *****************************/
 
 exports.getphotography = (req, res, next) => {
-    photography.fetchAll()
+    Photography.fetchAll()
         .then(([rows]) => {
             for (let p of rows) {
                 p.date = moment(p.date).format('MMM D, YYYY');
             }
-            console.log(JSON.stringify(rows, ["id", "title", "tag","content","img_url","url","date"]));
+            //console.log(JSON.stringify(rows, ["id", "title", "tag","content","img_url","url","date"]));
             //res.send(JSON.stringify(rows));
             res.render('photography', {
                 data: rows,
@@ -32,7 +32,7 @@ exports.getEditphotography = async(req, res, next) => {
     //         //console.log('findCategories(): ', JSON.stringify(rows));
     //     })
 
-    const findPostById = await photography.findById(req.query.id)
+    const findPostById = await Photography.findById(req.query.id)
         .then(([rows]) => {
             // for (let p of rows) {
             //     p.date = moment(p.date).format('YYYY-MM-DD');
@@ -46,7 +46,7 @@ exports.getEditphotography = async(req, res, next) => {
 
     console.log('photography: ', JSON.stringify(photography[0].date));
     
-    res.render('details', {
+    res.render('photographyEdit', {
         data: photography,
         title: 'Edit photography',
         // categories: categories
@@ -57,7 +57,7 @@ exports.getEditphotography = async(req, res, next) => {
 
 exports.postAddphotography = (req, res, next) => {
 
-    photography.add(req, res)
+    Photography.add(req, res)
         .then(([rows]) => {
             res.redirect('/');
         })
@@ -68,16 +68,16 @@ exports.postAddphotography = (req, res, next) => {
 
 
 exports.postUpdatephotography = (req, res, next) => {
-
-    photography.updateById(req, res)
+    console.log(req)
+    Photography.updateById(req, res)
         .then(([rows]) => {
-            res.redirect('/');
+            res.redirect('/photography');
         })
         .catch(err => console.log(err));
 };
 
 exports.getDeletephotography = (req, res, next) => {
-    photography.deleteById(req.query.id)
+    Photography.deleteById(req.query.id)
         .then(([rows]) => {
             res.redirect('/photography');
         })

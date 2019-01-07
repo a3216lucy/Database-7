@@ -2,19 +2,19 @@ const moment = require('moment');
 
 const New_topics = require('../models/new_topics');
 /* READ *****************************/
-exports.getProduct = async(req, res, next) => {
+exports.getProduct = async (req, res, next) => {
 
     let length1;
     let new_topics;
 
 
     const findlength = await New_topics.fetchAll()
-    .then(([rows]) => {
-        length1=rows.length
-       
-    })
-    .catch(err => console.log(err));
-    
+        .then(([rows]) => {
+            length1 = rows.length
+
+        })
+        .catch(err => console.log(err));
+
 
     const findPostById = await New_topics.findById(req.query.Page)
         .then(([rows]) => {
@@ -29,7 +29,7 @@ exports.getProduct = async(req, res, next) => {
         .catch(err => console.log(err));
 
     // console.log('post: ', JSON.stringify(post[0].date));
-        console.log(length1);
+    console.log(length1);
     res.render('new_topics', {
         data: new_topics,
         title: 'new_topics Post',
@@ -39,7 +39,7 @@ exports.getProduct = async(req, res, next) => {
 
 };
 
-exports.getEditProduct = async(req, res, next) => {
+exports.getEditProduct = async (req, res, next) => {
 
     let categories;
     let new_topics;
@@ -82,11 +82,10 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.postUpdateProduct = (req, res, next) => {
-    //console.log(req)
+    console.log(req)
     New_topics.updateById(req, res)
         .then(([rows]) => {
-
-            res.redirect('/');
+            res.redirect('/new_topics/?Page='+req.body.id);
         })
         .catch(err => console.log(err));
 };
@@ -94,7 +93,29 @@ exports.postUpdateProduct = (req, res, next) => {
 exports.getDeleteProduct = (req, res, next) => {
     New_topics.deleteById(req.query.id)
         .then(([rows]) => {
-            res.redirect('/new_topics');
+            res.redirect('/');
         })
         .catch();
 }
+
+// exports.getSearchProduct = async(req, res, next) => {
+//     let new_topics;
+//     let length1;
+//     const SearchProduct = await New_topics.findById(req.query.id)
+//         .then(([rows]) => {
+            
+//             new_topics = rows;
+//         })
+//         .catch(err => console.log(err));
+//     const findlength = await New_topics.fetchAll()
+//         .then(([rows]) => {
+//             length1 = rows.length
+
+//         })
+//         .catch(err => console.log(err));
+//     res.render('new_topics', {
+//         data: new_topics,
+//         title: 'new_topics Post',
+//         length: length1
+//     });
+// }

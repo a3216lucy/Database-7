@@ -102,7 +102,7 @@ exports.getDashboard = async (req, res, next) => {
       photographyCount:photographyCount
     }
 
-    console.log(JSON.stringify(data));
+    //console.log(JSON.stringify(data));
     //res.send(JSON.stringify(data));
 
     res.render('dashboard', {

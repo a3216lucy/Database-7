@@ -7,6 +7,8 @@ router.get('/', newTopicsController.getProduct);
 
 router.get('/edit', newTopicsController.getEditProduct);
 
+// router.get('/search', newTopicsController.getSearchProduct);
+
 router.post('/add', newTopicsController.postAddProduct);
 
 router.post('/update', newTopicsController.postUpdateProduct);

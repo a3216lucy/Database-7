@@ -47,7 +47,7 @@ module.exports = class new_Topics {
         //const date = new Date();
         console.log('model:updateById()', id, title, content, url)
         return db.execute(
-            'UPDATE new_topics SET title = ?, content = ?, url = ? WHERE id = ?', [title,tag, content, url,img_url,date, id]
+            'UPDATE new_topics SET title = ?, content = ?, url = ? WHERE id = ?', [title, content, url, id]
         );
     }
 
@@ -58,7 +58,6 @@ module.exports = class new_Topics {
             'DELETE FROM new_topics WHERE id = ?', [id]
         );
     }
-
 
     static getCount() {
         return db.execute('SELECT COUNT(*) as count FROM new_topics');

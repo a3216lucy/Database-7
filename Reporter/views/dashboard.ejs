@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="css/style.css">
     <title>Reporter</title>
     <script>
-        function editPost(id) {
-            window.location.href = "/post/edit?id=" + id;
+        function editPhoto(id) {
+            window.location.href = "/photography/edit?id=" + id;
         }
         function editTopic(id) {
             window.location.href = "/new_topics/edit?id=" + id;
@@ -133,7 +133,7 @@
                                         <%= photography[i].date %>
                                     </td>
                                     <td>
-                                        <button value="Details" class="btn btn-secondary" onclick="editPost('<%= photography[i].id %>')">
+                                        <button value="Details" class="btn btn-secondary" onclick="editPhoto('<%= photography[i].id %>')">
                                             <i class="fas fa-angle-double-right"></i> Details
                                         </button>
                                     </td>
@@ -144,7 +144,7 @@
                     </div>
                     <div class="card">
                         <div class="card-header">
-                            <h4>Latest Topics</h4>
+                            <h4>Latest 5 Topics</h4>
                         </div>
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -174,7 +174,7 @@
 
                                     <td>
                                         <button value="Topics" class="btn btn-secondary" onclick="editTopic('<%= topic[i].id %>')">
-                                            <i class="fas fa-angle-double-right"></i> Edit Topics
+                                            <i class="fas fa-angle-double-right"></i> Details
                                         </button>
                                     </td>
                                 </tr>

@@ -13,6 +13,10 @@
         function deleteAccount(id) {
             window.location.href = "/photography/delete?id=" + id;
         }
+        function editPhotography(id) {
+            window.location.href = "/new_topics/edit?id=" + id;
+        }
+        
     </script>
 </head>
 
@@ -155,7 +159,7 @@
                                     <tr>
                                         <th scope="row">detail</th>
                                         <td>
-                                            <button value="Details" class="btn btn-secondary" onclick="Edit('<%= data[i].id %>')">
+                                            <button value="Details" class="btn btn-secondary" onclick="editPhotography('<%= data[i].id %>')">
                                                 <i class="fas fa-angle-double-right"></i> Details
                                             </button>
                                         </td>

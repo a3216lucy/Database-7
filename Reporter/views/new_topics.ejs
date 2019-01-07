@@ -18,6 +18,13 @@
         function editTopic(id) {
             window.location.href = "/new_topics/edit?id=" + id;
         }
+        // function searchTopic() {
+        //     var id = document.getElementById('search').value;
+        //     window.location.href = "/new_topics/search?id=" + id;
+        // }
+        function searchURL(){
+    window.location = "/new_topics/?Page=" + document.getElementsByTagName("input")[0].value;;
+  }
         function PagePost(id) {
             window.location.href = "/new_topics/?Page=" + id;
         }
@@ -86,9 +93,9 @@
             <div class="row">
                 <div class="col-md-6 ml-auto">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search New Topics...">
+                        <input type="text" id="search" class="form-control" placeholder="Search New Topics...">
                         <div class="input-group-append">
-                            <button class="btn btn-primary">Search</button>
+                            <button onclick="searchURL()" class="btn btn-primary">Search</button>
                         </div>
                     </div>
                 </div>
@@ -155,9 +162,7 @@
                                         <button button value="Details" class="btn btn-secondary" onclick="editTopic('<%= data[0].id %>')">
                                             <i class="fas fa-angle-double-right"></i> Details
                                         </button>
-                                        <button value="Deletes" class="btn btn-secondary" onclick="deleteAccount('<%= data[0].id %>')">
-                                            <i class="fas fa-angle-double-right"></i> Delete
-                                        </button>
+            
                                     </td>
                                     </th>
                                 </tr>

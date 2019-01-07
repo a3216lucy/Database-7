@@ -34,14 +34,14 @@ module.exports = class photography {
     const id = req.body.id;
     const title = req.body.title;
     const tag = req.body.tag;
-    const content = req.body.content;
+    const content = req.body.editor1;
     const img_url=req.body.img_url;
     const url = req.body.url;
     const date = req.body.date;
     //const date = new Date();
     console.log('model:updateById()', id, title, tag, content, img_url, url, date)
     return db.execute(
-      'UPDATE photography SET title = ?, tag = ?,  content = ?, img_url = ?, url = ?, date = ? WHERE id = ?', [title, content, tag, date, url ,img_url, id]
+      'UPDATE photography SET title = ?, tag = ?,  content = ?, img_url = ?, url = ?, date = ? WHERE id = ?', [title,tag, content,img_url, url, date , id]
     );
   }
 
