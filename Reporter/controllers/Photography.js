@@ -5,23 +5,36 @@ const Photography = require('../models/photography');
 
 /* READ *****************************/
 
-exports.getphotography = (req, res, next) => {
-    Photography.fetchAll()
+exports.getphotography = async(req, res, next) => {
+    let length1;
+    let photography;
+    const findlength = await Photography.fetchAll()
         .then(([rows]) => {
+            length1 = rows.length;
+        })
+        .catch(err => console.log(err));
+
+    const findPostById = await Photography.findById(req.query.Page)
+        .then(([rows]) => {
+            
             for (let p of rows) {
                 p.date = moment(p.date).format('MMM D, YYYY');
             }
+            photography = rows;
             //console.log(JSON.stringify(rows, ["id", "title", "tag","content","img_url","url","date"]));
             //res.send(JSON.stringify(rows));
-            res.render('photography', {
-                data: rows,
-                title: 'list',
-            });
+
         })
         .catch(err => console.log(err));
+    console.log(length1);
+    res.render('photography', {
+        data: photography,
+        title: 'list',
+        length: length1
+    });
 };
 
-exports.getEditphotography = async(req, res, next) => {
+exports.getEditphotography = async (req, res, next) => {
 
     // let categories;
     let photography;
@@ -45,13 +58,13 @@ exports.getEditphotography = async(req, res, next) => {
         .catch(err => console.log(err));
 
     console.log('photography: ', JSON.stringify(photography[0].date));
-    
+
     res.render('photographyEdit', {
         data: photography,
         title: 'Edit photography',
         // categories: categories
 
-   });
+    });
 
 };
 
@@ -71,7 +84,7 @@ exports.postUpdatephotography = (req, res, next) => {
     console.log(req)
     Photography.updateById(req, res)
         .then(([rows]) => {
-            res.redirect('/photography');
+            res.redirect('/photography/?Page='+req.body.id);
         })
         .catch(err => console.log(err));
 };
@@ -79,7 +92,7 @@ exports.postUpdatephotography = (req, res, next) => {
 exports.getDeletephotography = (req, res, next) => {
     Photography.deleteById(req.query.id)
         .then(([rows]) => {
-            res.redirect('/photography');
+            res.redirect('/');
         })
         .catch();
 }
