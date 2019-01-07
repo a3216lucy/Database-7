@@ -1,8 +1,5 @@
 const moment = require('moment');
 
-const Post = require('../models/post');
-const Category = require('../models/category');
-const User = require('../models/user');
 const New_topics = require('../models/new_topics');
 const Photography = require('../models/photography');
 
@@ -26,11 +23,6 @@ const Photography = require('../models/photography');
 
 exports.getDashboard = async (req, res, next) => {
 
-  let posts;
-  let postCounts;
-  let categories;
-  let categoryCount;
-  let userCount;
   let cname;
   let new_topics;
   let photography;
@@ -38,37 +30,6 @@ exports.getDashboard = async (req, res, next) => {
   let photographyCount;
 
   try {
-    const getPosts = await Post.fetchAll()
-      .then(([rows]) => {
-        for (let p of rows) {
-          p.date = moment(p.date).format('MMM D, YYYY');
-        }
-        posts = rows;
-      })
-    const getPostCount = await Post.getCount()
-      .then(([rows]) => {
-        postCount = rows[0].count;
-      })
-
-    const getCategories = await Category.fetchAll()
-      .then(([rows]) => {
-        for (let p of rows) {
-          p.date = moment(p.date).format('MMM D, YYYY');
-        }
-        categories = rows;
-      })
-
-    const getCategoryCount = await Category.getCount()
-      .then(([rows]) => {
-        categoryCount = rows[0].count;
-      })
-
-    const getUserCount = await User.getCount()
-      .then(([rows]) => {
-        userCount = rows[0].count;
-        // console.log('user count 1: ', userCount);
-      })
-
     const getTopics = await New_topics.fetchAll()
       .then(([rows]) => {
         //res.send(JSON.stringify(rows));
@@ -91,15 +52,10 @@ exports.getDashboard = async (req, res, next) => {
       })
 
     let data = {
-      posts: posts,
-      categories: categories,
-      postCount: postCount,
-      categoryCount: categoryCount,
-      userCount: userCount,
       topic: new_topics,
       photography: photography,
       new_topicsCount: new_topicsCount,
-      photographyCount:photographyCount
+      photographyCount: photographyCount
     }
 
     //console.log(JSON.stringify(data));
@@ -109,11 +65,7 @@ exports.getDashboard = async (req, res, next) => {
       title: 'Dashboard',
       color: 'btn-primary',
       icon: 'fa-cog',
-      data: posts,
-      categories: categories,
-      categoryCount: categoryCount,
-      postCount: postCount,
-      userCount: userCount,
+    
       topic: new_topics,
       photography: photography,
       new_topicsCount: new_topicsCount,

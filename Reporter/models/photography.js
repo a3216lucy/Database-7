@@ -15,8 +15,7 @@ module.exports = class photography {
   static add(req, res) {
     //console.log('add():', req.body.name, req.body.price);
     return db.execute(
-      'INSERT INTO photography (title, tag, content, img_url, url, date) VALUES (?, ?, ?, ?, ?, ?)',
-      [req.body.title, req.body.tag, req.body.content, req.body.img_url, req.body.url, req.body.date]
+      'INSERT INTO photography (title,tag, content, img_url, url, date) VALUES (?, ?, ?, ?, ?, ?)', [req.body.title, req.body.tag, req.body.editor1, req.body.img_url,req.body.url, req.body.date]
     );
   }
 

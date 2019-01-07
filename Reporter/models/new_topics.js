@@ -14,7 +14,7 @@ module.exports = class new_Topics {
 
     static pythonAdd(results){
         return db.execute(
-            'INSERT INTO new_topics (title, content, url) VALUES (?, ?, ?)', [results.title, results.content, results.url]
+            // 'INSERT INTO new_topics (title,tag, content, img_url, url, date) VALUES (?, ?, ?, ?, ?, ?)', [results.title, results.content, results.url]
         );
     }
     
@@ -22,7 +22,7 @@ module.exports = class new_Topics {
     static add(req, res) {
         //console.log('add():', req.body.name, req.body.price);
         return db.execute(
-            'INSERT INTO new_topics (title, content, url) VALUES (?, ?, ?)', [req.body.title, req.body.content, req.body.url]
+            'INSERT INTO new_topics (title,tag, content, img_url, url, date) VALUES (?, ?, ?, ?, ?, ?)', [req.body.title, req.body.tag, req.body.editor1, req.body.img_url,req.body.url, req.body.date]
         );
     }
 
@@ -45,9 +45,9 @@ module.exports = class new_Topics {
         const img_url = req.body.img_url;
         const date = req.body.date;
         //const date = new Date();
-        console.log('model:updateById()', id, title, content, url)
+        // console.log('model:updateById()', id, title, content, url)
         return db.execute(
-            'UPDATE new_topics SET title = ?, content = ?, url = ? WHERE id = ?', [title, content, url, id]
+            'UPDATE new_topics SET title=? ,tag=? , content=? , img_url=? , url=? , date=? WHERE id = ?', [title,tag, content, img_url, url, date,id]
         );
     }
 

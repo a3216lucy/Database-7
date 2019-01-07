@@ -5,9 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var dashboardRouter = require('./routes/dashboard');
-var usersRouter = require('./routes/users');
-const postRouter = require('./routes/post');
-const productRoutuer = require('./routes/db_405631697');
 const newTopicsRouter = require('./routes/new_topics');
 const photographyRouter = require('./routes/photography');
 var app = express();
@@ -23,9 +20,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', dashboardRouter);
-app.use('/post', postRouter);
-app.use('/users', usersRouter);
-app.use('/db_405631697', productRoutuer);
 app.use('/new_topics', newTopicsRouter);
 app.use('/photography', photographyRouter);
 

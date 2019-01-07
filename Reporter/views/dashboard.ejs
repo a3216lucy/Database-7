@@ -18,13 +18,17 @@
         function editTopic(id) {
             window.location.href = "/new_topics/edit?id=" + id;
         }
-        function addPost() {
-            document.getElementById("addPost").submit();
+        function addTopic() {
+            document.getElementById("addTopic").submit();
+        }
+        function addPhotography() {
+            document.getElementById("addPhotography").submit();
         }
     </script>
 </head>
 
 <body>
+    <!-- <div class="bg"></div> -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark p-0">
         <div class="container">
             <a href="" class="navbar-brand">Reporter</a>
@@ -44,26 +48,7 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown mr-3">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i class="fas fa-user"></i> Welcome Brad
-                        </a>
-                        <div class="dropdown-menu">
-                            <a href="/user/profile" class="dropdown-item">
-                                <i class="fas fa-user-circle"></i> Profile
-                            </a>
-                            <a href="/user/setting" class="dropdown-item">
-                                <i class="fas fa-cog"></i> Settings
-                            </a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/user/logout" class="nav-link">
-                            <i class="fas fa-user-times"></i> Logout
-                        </a>
-                    </li>
-                </ul>
+                
             </div>
         </div>
     </nav>
@@ -82,21 +67,22 @@
 
     <!-- ACTIONS -->
     <section id="actions" class="py-4 mb-4 bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <a href="/post/add" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addPostModal">
-                        <i class="fas fa-plus"></i> Add Topic
-                    </a>
-                </div>
-                <div class="col-md-3">
-                    <a href="/category/add" class="btn btn-success btn-block" data-toggle="modal" data-target="#addCategoryModal">
-                        <i class="fas fa-plus"></i> Add Photography
-                    </a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <a href="/new_topics/add" class="btn btn-primary btn-block" data-toggle="modal" data-target="#addTopicModal">
+                            <i class="fas fa-plus"></i> Add Topic
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="/photography/add" class="btn btn-success btn-block" data-toggle="modal" data-target="#addPhotographyModal">
+                            <i class="fas fa-plus"></i> Add Photography
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    
 
     <!-- POSTS -->
     <section id="photography">
@@ -105,7 +91,7 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Latest Photography</h4>
+                            <h4>Latest 5 Photography</h4>
                         </div>
                         <table class="table table-striped">
                             <thead class="thead-dark">
@@ -188,7 +174,7 @@
                         <div class="card-body">
                             <h3>Photography</h3>
                             <h4 class="display-4">
-                                <i class="fas fa-pencil-alt"></i>
+                                <i class="fas fa-book"></i>
                                 <%= photographyCount %>
                             </h4>
                             <a href="/photography/?Page=1" class="btn btn-outline-light btn-sm">View</a>
@@ -199,7 +185,7 @@
                         <div class="card-body">
                             <h3>Topics</h3>
                             <h4 class="display-4">
-                                <i class="fas fa-folder"></i>
+                                <i class="fas fa-camera-retro"></i>
                                 <%= new_topicsCount %>
                             </h4>
                             <a href="/new_topics/?Page=1" class="btn btn-outline-light btn-sm">View</a>
@@ -227,6 +213,96 @@
 
 
     <!-- MODALS -->
+    <!-- MODALS -->
+    <div class="modal fade" id="addTopicModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Add Topic</h5>
+                        <button class="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addTopic" action="/new_topics/add" method="post">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input name='title' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="tag">tag</label>
+                                <input name='tag' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="url">Url</label>
+                                <input name='url' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="img_url">Img_url</label>
+                                <input name='img_url' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input name='date' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea name="editor1" class="form-control"></textarea>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal" onclick="addTopic()">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="addPhotographyModal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary text-white">
+                        <h5 class="modal-title">Add Photography</h5>
+                        <button class="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addPhotography" action="/photography/add" method="post">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input name='title' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="tag">tag</label>
+                                <input name='tag' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="url">Url</label>
+                                <input name='url' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="img_url">Img_url</label>
+                                <input name='img_url' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="date">Date</label>
+                                <input name='date' type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Content</label>
+                                <textarea name="editor1" class="form-control"></textarea>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" data-dismiss="modal" onclick="addPhotography()">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
     <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

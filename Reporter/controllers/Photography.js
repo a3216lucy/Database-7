@@ -1,7 +1,6 @@
 const moment = require('moment');
 
 const Photography = require('../models/photography');
-// const Company = require('../models/company');
 
 /* READ *****************************/
 
